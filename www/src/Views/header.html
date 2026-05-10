@@ -1,0 +1,37 @@
+<header>
+    <nav id="navbar" aria-label="main navigation">
+        <div id="navbar-content">
+            <a href="/">
+                <img id="header-logo-desktop" src="../assets/images/logo/CommunityTable_logoTransparentYellow.png"
+                    alt="community-table-logo">
+            </a>
+            <ul>
+                {% if loggedin and ('Staff' in pagetitle or 'Volunteer' in pagetitle) %}
+                <li><a href="/">Home</a></li>
+                <li><a href="/logout">Logout</a></li>
+                {% elseif loggedin and pagetitle == 'Community Table' %}
+                <li><a href="#home">Home</a></li>
+                <li><a href="#story">Story</a></li>
+                <li><a href="#testimonials">Testimonials</a></li>
+                <li><a href="#contact">Contact</a></li>
+                {% if role == 'staff' %}
+                <li><a href="/staff">Dashboard</a></li>
+                {% else %}
+                <li><a href="/volunteer">Dashboard</a></li>
+                {% endif %}
+                <li><a href="/logout">Logout</a></li>
+                {% else %}
+                <li><a href="#home">Home</a></li>
+                <li><a href="#story">Story</a></li>
+                <li><a href="#testimonials">Testimonials</a></li>
+                <li><a href="#contact">Contact</a></li>
+                <li><a href="/login">Login</a></li>
+                {% endif %}
+            </ul>
+        </div>
+    </nav>
+    <a href="/">
+        <img id="header-logo-mobile" src="../assets/images/logo/CommunityTable_logoTransparentYellow.png"
+            alt="community-table-logo" aria-label="Community table logo">
+    </a>
+</header>

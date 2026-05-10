@@ -1,0 +1,53 @@
+<footer>
+    <div id="footer-content">
+        <section id="footer-navigation" aria-labelledby="footer-navigation">
+            <h2>Site Navigation</h2>
+            <ul>
+                {% if loggedin and ('Staff' in pagetitle or 'Volunteer' in pagetitle) %}
+                <li><a href="/">Home</a></li>
+                <li><a href="/logout">Logout</a></li>
+                {% elseif loggedin and pagetitle == 'Community Table' %}
+                <li><a href="#home">Home</a></li>
+                <li><a href="#story">Story</a></li>
+                <li><a href="#testimonials">Testimonials</a></li>
+                <li><a href="#contact">Contact</a></li>
+                {% if role == 'staff' %}
+                <li><a href="/staff">Dashboard</a></li>
+                {% else %}
+                <li><a href="/volunteer">Dashboard</a></li>
+                {% endif %}
+                <li><a href="/logout">Logout</a></li>
+                {% else %}
+                <li><a href="#home">Home</a></li>
+                <li><a href="#story">Story</a></li>
+                <li><a href="#testimonials">Testimonials</a></li>
+                <li><a href="#contact">Contact</a></li>
+                <li><a href="/login">Login</a></li>
+                {% endif %}
+            </ul>
+        </section>
+
+        <section id="footer-opening-times" aria-labelledby="footer-opening-times">
+            <h2>Opening Times</h2>
+            {% if open_hours %}
+            <ul>
+                {% for entry in open_hours %}
+                <li>{{ entry.day[:3] }}: {{ entry.open }} - {{ entry.close }}</li>
+                {% endfor %}
+            </ul>
+            {% else %}
+            <p>Opening hours are not available at the moment.</p>
+            {% endif %}
+        </section>
+
+        <section id="footer-social-media" aria-labelledby="footer-social-media">
+            <h2>Social Media</h2>
+            <ul>
+                <li>Instagram<br>(@communitykitchenldn)</li>
+            </ul>
+        </section>
+    </div>
+
+    <img id="footer-logo-img" src="../assets/images/logo/CommunityTable_logoTransparentYellow.png"
+        alt="community-table-logo" aria-label="Community table logo">
+</footer>

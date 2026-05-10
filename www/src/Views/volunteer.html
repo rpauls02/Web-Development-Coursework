@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en-gb">
+
+{% include 'head.html' %}
+
+<body>
+    {% include 'header.html' %}
+
+    <main class="content" id="volunteer-page">
+        <div id="volunteer-content">
+            <h1>Volunteer</h1>
+            <p>Use the below interface to volunteer for available shifts.</p>
+            {% if not logged_in %}
+
+            <p><strong>Note:</strong> You are not currently logged in. You must be logged in to sign up for shifts.</p>
+            {% endif %}
+
+            <hr>
+
+            <div id="filter-shifts-content">
+                <p>Use the filters below to find available shifts for your preferred date and time.</p>
+                <div id="shift-list-filters">
+                    <span>
+                        <p>Shift: </p>
+                        <select id="shift-select">
+                            <option value="All" selected>All</option>
+                            <option value="Yellow Shift">Yellow Shift</option>
+                            <option value="Blue Shift">Blue Shift</option>
+                            <option value="Orange Shift">Orange Shift</option>
+                            <option value="Purple Shift">Purple Shift</option>
+                        </select>
+                    </span>
+
+                    <span>
+                        <p>Start: </p>
+                        <select class="time-select">
+                            <option value="All" selected>All</option>
+                        </select>
+                    </span>
+
+                    <span>
+                        <p>End: </p>
+                        <select class="time-select">
+                            <option value="All" selected>All</option>
+                        </select>
+                    </span>
+
+                    <button>Reset filters</button>
+                </div>
+            </div>
+
+            <hr>
+
+            <div id="select-shift-content">
+                <p>Select a shift below that you'd like to volunteer for.</p>
+                <table id="shifts-table">
+                    <thead>
+                        <tr>
+                            <th>Day</th>
+                            <th>Date</th>
+                            <th>Shifts</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% if shifts %}
+                        {% set currentDate = null %}
+
+                        {% for shift in shifts %}
+                        {% if currentDate != shift.date %}
+                        {% set currentDate = shift.date %}
+                        {% set dayName = shift.date|date('l') %} {# calculate day name #}
+
+                        <tr>
+                            <td>{{ dayName }}</td>
+                            <td>{{ shift.date|date('d/m/Y') }}</td>
+                            <td>
+                                <div id="shift-list">
+                                    {% for s in shifts %}
+                                    {% if s.date == currentDate %}
+                                    <button class="shift-button" data-shift-id="{{ s.id }}"
+                                        data-shift-name="{{ s.name }}" data-shift-date="{{ s.date }}"
+                                        data-shift-day="{{ s.date|date('l') }}" data-shift-start="{{ s.start }}"
+                                        data-shift-end="{{ s.end }}">
+                                        <strong>{{ s.name }}</strong>
+                                        <small>{{ s.start }} - {{ s.end }}</small>
+                                    </button>
+                                    {% endif %}
+                                    {% endfor %}
+                                </div>
+                            </td>
+                        </tr>
+                        {% endif %}
+                        {% endfor %}
+
+                        {% else %}
+                        <tr>
+                            <td colspan="3">No shifts available for the next two weeks.</td>
+                        </tr>
+                        {% endif %}
+                    </tbody>
+                </table>
+            </div>
+
+            <hr>
+
+            <div id="shift-summary-content">
+                <p>Confirm the details below for the shift you've selected.</p>
+                <form id="signup-form" action="/api/signup" method="POST">
+                    <div>
+                        <p>Shift: <strong><span id="summary-name"></span></strong></p>
+                        <p>Day: <strong><span id="summary-day"></span></strong> </p>
+                        <p>Date: <strong><span id="summary-date"></span></strong></p>
+                    </div>
+                    <div>
+                        <p>Start time: <strong><span id="summary-start"></span></strong></p>
+                        <p>End time: <strong><span id="summary-end"></span></strong></p>
+                    </div>
+                    <input type="hidden" name="shift_id" id="shift-id-input">
+                    <input id="confirm-signup-btn" type="submit" value="Confirm">
+                    <button id="cancel-selection-btn" type="button">Cancel</button>
+
+                    {% if error %}
+                    <div class="error-msg-panel">
+                        <p>{{ error|raw }}</p>
+                    </div>
+                    {% endif %}
+
+                    {% if success %}
+                    <div class="success-msg-panel">
+                        <p>{{success}}</p>
+                    </div>
+                    {% endif %}
+                </form>
+            </div>
+        </div>
+    </main>
+</body>
+
+</html>

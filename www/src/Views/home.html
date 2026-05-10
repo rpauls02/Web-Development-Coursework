@@ -1,0 +1,54 @@
+<section id="home" aria-label="Community Table home">
+    <div id="bg-wrapper">
+        <img id="bg-image" alt="">
+    </div>
+
+    <section id="information-container">
+        <h1>A Table Set for All</h1>
+
+        <article>
+            We welcome everyone — no referrals or proof of need required. All meals are vegetarian-friendly,
+            with vegan and gluten-free options available daily. The space is fully wheelchair accessible,
+            with step-free entry and accessible bathrooms.
+        </article>
+
+        <section id="information-cards">
+            <article id="opening-times-card" aria-label="Community table opening times">
+                <i class="fa-solid fa-clock"></i>
+                <h2 class="card-title">Opening Times</h2>
+
+                {% if open_hours %}
+                <ul>
+                    {% for entry in open_hours %}
+                    <li>{{ entry.day[:3] }}: {{ entry.open }} - {{ entry.close }}</li>
+                    {% endfor %}
+                </ul>
+                {% else %}
+                <p>Opening hours are not available at the moment.</p>
+                {% endif %}
+            </article>
+
+            <article id="dietary-needs-card" aria-label="Community table dietary needs">
+                <i class="fa-solid fa-leaf"></i>
+                <h2 class="card-title">Dietary Needs</h2>
+                <ul>
+                    <li>Vegetarian</li>
+                    <li>Vegan</li>
+                    <li>Gluten-free</li>
+                </ul>
+            </article>
+
+            <article id="accessibility-card" aria-label="Community table accessibility">
+                <i class="fa-solid fa-wheelchair-move"></i>
+                <h2 class="card-title">Accessibility</h2>
+                <ul>
+                    <li>Fully wheelchair accessible</li>
+                    <li>Step-free entry</li>
+                    <li>Accessible bathrooms</li>
+                </ul>
+            </article>
+        </section>
+
+        <button><a href="/volunteer">Volunteer today!</a></button>
+    </section>
+</section>

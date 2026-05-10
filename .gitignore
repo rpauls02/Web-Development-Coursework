@@ -3,6 +3,10 @@
 /config/*
 /data/*
 /logs/*
-/www/**
 .DS_Store
 /buildtest
+/www/compilation_cache
+/www/Emails
+/www/vendor
+/www/assets/css/*.css
+/www/assets/css/*.map

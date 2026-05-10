@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en-gb">
+
+{% include 'head.html' %}
+
+<body>
+    {% include 'header.html' %}
+
+    <main class="content" id="staff-dashboard-page">
+
+        <div id="staff-dashboard-breadcrumb">
+            <span class="breadcrumb-root">Staff Dashboard</span>
+            <span class="breadcrumb-separator">/</span>
+            <span id="breadcrumb-section">-</span>
+            <span class="breadcrumb-separator">/</span>
+            <span id="breadcrumb-action">-</span>
+        </div>
+
+        <div id="staff-dashboard-container">
+            <nav class="main-nav">
+                <ul>
+                    <li class="nav-item" id="manage-opening-hours-mn-item">Opening Hours</li>
+                    <li class="nav-item" id="manage-shifts-mn-item">Shifts</li>
+                    <li class="nav-item" id="view-signups-mn-item">Signups</li>
+                </ul>
+            </nav>
+
+            <nav class="sub-nav" id="manage-open-hours-sub-nav">
+                <ul>
+                    <li class="nav-item" id="create-open-hours-sn-item">Create Opening Hours</li>
+                    <li class="nav-item" id="edit-open-hours-sn-item">Edit Opening Hours</li>
+                </ul>
+            </nav>
+
+            <nav class="sub-nav" id="manage-shifts-sub-nav">
+                <ul>
+                    <li class="nav-item" id="create-shifts-sn-item">Create Shifts</li>
+                    <li class="nav-item" id="edit-shifts-sn-item">Edit Shifts</li>
+                </ul>
+            </nav>
+
+            <div id="staff-dashboard-content">
+                <div id="welcome-content">
+                    <h1>Welcome back</h1>
+                    <h2>Use the navigation bar above to perform an action</h2>
+                </div>
+
+                <div id="create-open-hours-content">
+                    <h2>
+                        Creating opening hours for week beginning
+                        <input type="date" class="date-input" aria-label="Select week date">
+                    </h2>
+
+                    <p>To create opening hours, select a week above and fill in the opening and closing times below.</p>
+                    <p>When complete, click 'Submit' below to confirm your selection.</p>
+
+                    <div class="message-panel"></div>
+
+                    <table id="create-open-hours-table">
+                        <thead>
+                            <tr>
+                                <th>Day</th>
+                                <th>Date</th>
+                                <th>Open</th>
+                                <th>Close</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <tr>
+                                <td class="day">Monday</td>
+                                <td class="date">-</td>
+                                <td class="open-time"><select class="open-select"></select></td>
+                                <td class="close-time"><select class="close-select"></select></td>
+                            </tr>
+                            <tr>
+                                <td class="day">Tuesday</td>
+                                <td class="date">-</td>
+                                <td class="open-time"><select class="open-select"></select></td>
+                                <td class="close-time"><select class="close-select"></select></td>
+                            </tr>
+                            <tr>
+                                <td class="day">Wednesday</td>
+                                <td class="date">-</td>
+                                <td class="open-time"><select class="open-select"></select></td>
+                                <td class="close-time"><select class="close-select"></select></td>
+                            </tr>
+                            <tr>
+                                <td class="day">Thursday</td>
+                                <td class="date">-</td>
+                                <td class="open-time"><select class="open-select"></select></td>
+                                <td class="close-time"><select class="close-select"></select></td>
+                            </tr>
+                            <tr>
+                                <td class="day">Friday</td>
+                                <td class="date">-</td>
+                                <td class="open-time"><select class="open-select"></select></td>
+                                <td class="close-time"><select class="close-select"></select></td>
+                            </tr>
+                            <tr>
+                                <td class="day">Saturday</td>
+                                <td class="date">-</td>
+                                <td class="open-time"><select class="open-select"></select></td>
+                                <td class="close-time"><select class="close-select"></select></td>
+                            </tr>
+                            <tr>
+                                <td class="day">Sunday</td>
+                                <td class="date">-</td>
+                                <td class="open-time"><select class="open-select"></select></td>
+                                <td class="close-time"><select class="close-select"></select></td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <button id="submit-open-hours" onclick="submitOpenHours()">Submit</button>
+                </div>
+
+                <div id="edit-open-hours-content">
+                    <h2>
+                        Viewing opening hours for w/b
+                        <input type="date" class="date-input" aria-label="Select week date">
+                    </h2>
+
+                    <p>To edit open hours, click "Edit opening hours" below and select another time from the dropdown
+                        menu for each opening and closing time.</p>
+                    <p>When complete, click 'Submit changes' below to confirm your selection.</p>
+
+                    <div class="message-panel"></div>
+
+                    <table id="edit-open-hours-table">
+                        <thead>
+                            <tr>
+                                <th>Day</th>
+                                <th>Date</th>
+                                <th>Opening time</th>
+                                <th>Closing time</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <tr>
+                                <td class="day">Monday</td>
+                                <td class="date">-</td>
+                                <td class="open-time">-</td>
+                                <td class="close-time">-</td>
+                            </tr>
+                            <tr>
+                                <td class="day">Tuesday</td>
+                                <td class="date">-</td>
+                                <td class="open-time">-</td>
+                                <td class="close-time">-</td>
+                            </tr>
+                            <tr>
+                                <td class="day">Wednesday</td>
+                                <td class="date">-</td>
+                                <td class="open-time">-</td>
+                                <td class="close-time">-</td>
+                            </tr>
+                            <tr>
+                                <td class="day">Thursday</td>
+                                <td class="date">-</td>
+                                <td class="open-time">-</td>
+                                <td class="close-time">-</td>
+                            </tr>
+                            <tr>
+                                <td class="day">Friday</td>
+                                <td class="date">-</td>
+                                <td class="open-time">-</td>
+                                <td class="close-time">-</td>
+                            </tr>
+                            <tr>
+                                <td class="day">Saturday</td>
+                                <td class="date">-</td>
+                                <td class="open-time">-</td>
+                                <td class="close-time">-</td>
+                            </tr>
+                            <tr>
+                                <td class="day">Sunday</td>
+                                <td class="date">-</td>
+                                <td class="open-time">-</td>
+                                <td class="close-time">-</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="table-utils">
+                        <button class="edit-table-button" onclick="toggleEditOpenHours()">Edit opening hours</button>
+                    </div>
+
+                    <div class="edit-table-utils">
+                        <button class="submit-changes-button" onclick="submitOpenHoursChanges()">Submit changes</button>
+                        <button class="cancel-edit-button" onclick="toggleEditOpenHours()">Cancel</button>
+                    </div>
+                </div>
+
+                <div id="create-shifts-content">
+                    <h2>
+                        Creating shifts for week beginning
+                        <input type="date" class="date-input" aria-label="Select week date">
+                    </h2>
+
+                    <p>To create shifts, select a week above and fill in the opening and closing times below.</p>
+                    <p>When complete, click 'Submit' below to confirm your selection.</p>
+
+                    <div class="message-panel"></div>
+
+                    <table id="create-shifts-table">
+                        <thead>
+                            <tr>
+                                <th>Day</th>
+                                <th>Date</th>
+                                <th>Yellow Shift</th>
+                                <th>Blue Shift</th>
+                                <th>Orange Shift</th>
+                                <th>Purple Shift</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <tr>
+                                <td class="day">Monday</td>
+                                <td class="date">-</td>
+                                <td class="shift-cell">
+                                    <select class="start-select"></select> - <select class="end-select"></select>
+                                </td>
+                                <td class="shift-cell">
+                                    <select class="start-select"></select> - <select class="end-select"></select>
+                                </td>
+                                <td class="shift-cell">
+                                    <select class="start-select"></select> - <select class="end-select"></select>
+                                </td>
+                                <td class="shift-cell">
+                                    <select class="start-select"></select> - <select class="end-select"></select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="day">Tuesday</td>
+                                <td class="date">-</td>
+                                <td class="shift-cell">
+                                    <select class="start-select"></select> - <select class="end-select"></select>
+                                </td>
+                                <td class="shift-cell">
+                                    <select class="start-select"></select> - <select class="end-select"></select>
+                                </td>
+                                <td class="shift-cell">
+                                    <select class="start-select"></select> - <select class="end-select"></select>
+                                </td>
+                                <td class="shift-cell">
+                                    <select class="start-select"></select> - <select class="end-select"></select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="day">Wednesday</td>
+                                <td class="date">-</td>
+                                <td class="shift-cell">
+                                    <select class="start-select"></select> - <select class="end-select"></select>
+                                </td>
+                                <td class="shift-cell">
+                                    <select class="start-select"></select> - <select class="end-select"></select>
+                                </td>
+                                <td class="shift-cell">
+                                    <select class="start-select"></select> - <select class="end-select"></select>
+                                </td>
+                                <td class="shift-cell">
+                                    <select class="start-select"></select> - <select class="end-select"></select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="day">Thursday</td>
+                                <td class="date">-</td>
+                                <td class="shift-cell">
+                                    <select class="start-select"></select> - <select class="end-select"></select>
+                                </td>
+                                <td class="shift-cell">
+                                    <select class="start-select"></select> - <select class="end-select"></select>
+                                </td>
+                                <td class="shift-cell">
+                                    <select class="start-select"></select> - <select class="end-select"></select>
+                                </td>
+                                <td class="shift-cell">
+                                    <select class="start-select"></select> - <select class="end-select"></select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="day">Friday</td>
+                                <td class="date">-</td>
+                                <td class="shift-cell">
+                                    <select class="start-select"></select> - <select class="end-select"></select>
+                                </td>
+                                <td class="shift-cell">
+                                    <select class="start-select"></select> - <select class="end-select"></select>
+                                </td>
+                                <td class="shift-cell">
+                                    <select class="start-select"></select> - <select class="end-select"></select>
+                                </td>
+                                <td class="shift-cell">
+                                    <select class="start-select"></select> - <select class="end-select"></select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="day">Saturday</td>
+                                <td class="date">-</td>
+                                <td class="shift-cell">
+                                    <select class="start-select"></select> - <select class="end-select"></select>
+                                </td>
+                                <td class="shift-cell">
+                                    <select class="start-select"></select> - <select class="end-select"></select>
+                                </td>
+                                <td class="shift-cell">
+                                    <select class="start-select"></select> - <select class="end-select"></select>
+                                </td>
+                                <td class="shift-cell">
+                                    <select class="start-select"></select> - <select class="end-select"></select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="day">Sunday</td>
+                                <td class="date">-</td>
+                                <td class="shift-cell">
+                                    <select class="start-select"></select> - <select class="end-select"></select>
+                                </td>
+                                <td class="shift-cell">
+                                    <select class="start-select"></select> - <select class="end-select"></select>
+                                </td>
+                                <td class="shift-cell">
+                                    <select class="start-select"></select> - <select class="end-select"></select>
+                                </td>
+                                <td class="shift-cell">
+                                    <select class="start-select"></select> - <select class="end-select"></select>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <button id="submit-shifts" onclick=submitShifts()>Submit</button>
+                </div>
+
+                <div id="edit-shifts-content">
+                    <h2>
+                        Viewing shifts for w/b
+                        <input type="date" class="date-input" aria-label="Select week date">
+                    </h2>
+
+                    <p>To edit displayed shifts, click "Edit shifts" below and select another time from the dropdown
+                        menu for each start and end time.</p>
+                    <p>When complete, click 'Submit changes' below to confirm your selection.</p>
+
+                    <div class="message-panel"></div>
+
+                    <table id="edit-shifts-table">
+                        <thead>
+                            <tr>
+                                <th>Day</th>
+                                <th>Date</th>
+                                <th>Yellow Shift</th>
+                                <th>Blue Shift</th>
+                                <th>Orange Shift</th>
+                                <th>Purple Shift</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <tr>
+                                <td class="day">Monday</td>
+                                <td class="date">-</td>
+                                <td class="shift-time">-</td>
+                                <td class="shift-time">-</td>
+                                <td class="shift-time">-</td>
+                                <td class="shift-time">-</td>
+                            </tr>
+                            <tr>
+                                <td class="day">Tuesday</td>
+                                <td class="date">-</td>
+                                <td class="shift-time">-</td>
+                                <td class="shift-time">-</td>
+                                <td class="shift-time">-</td>
+                                <td class="shift-time">-</td>
+                            </tr>
+                            <tr>
+                                <td class="day">Wednesday</td>
+                                <td class="date">-</td>
+                                <td class="shift-time">-</td>
+                                <td class="shift-time">-</td>
+                                <td class="shift-time">-</td>
+                                <td class="shift-time">-</td>
+                            </tr>
+                            <tr>
+                                <td class="day">Thursday</td>
+                                <td class="date">-</td>
+                                <td class="shift-time">-</td>
+                                <td class="shift-time">-</td>
+                                <td class="shift-time">-</td>
+                                <td class="shift-time">-</td>
+                            </tr>
+                            <tr>
+                                <td class="day">Friday</td>
+                                <td class="date">-</td>
+                                <td class="shift-time">-</td>
+                                <td class="shift-time">-</td>
+                                <td class="shift-time">-</td>
+                                <td class="shift-time">-</td>
+                            </tr>
+                            <tr>
+                                <td class="day">Saturday</td>
+                                <td class="date">-</td>
+                                <td class="shift-time">-</td>
+                                <td class="shift-time">-</td>
+                                <td class="shift-time">-</td>
+                                <td class="shift-time">-</td>
+                            </tr>
+                            <tr>
+                                <td class="day">Sunday</td>
+                                <td class="date">-</td>
+                                <td class="shift-time">-</td>
+                                <td class="shift-time">-</td>
+                                <td class="shift-time">-</td>
+                                <td class="shift-time">-</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="table-utils">
+                        <button class="edit-table-button" onclick="toggleEditShifts()">Edit shifts</button>
+                    </div>
+
+                    <div class="edit-table-utils">
+                        <button class="submit-changes-button" onclick="submitShiftsChanges()">Submit changes</button>
+                        <button class="cancel-edit-button" onclick="toggleEditShifts()">Cancel</button>
+                    </div>
+                </div>
+
+                <div id="view-signups-content">
+                    <h2>
+                        Viewing signed up shifts for week beginning
+                        <input type="date" class="date-input" aria-label="Select week date">
+                    </h2>
+                    <p>To view details, select a shift from the list above.</p>
+
+                    <div class="message-panel"></div>
+
+                    <div class="table-wrapper">
+                        <table id="view-signups-table">
+                            <thead>
+                                <tr>
+                                    <th>Day</th>
+                                    <th>Date</th>
+                                    <th>Time</th>
+                                    <th>Shift Name</th>
+                                    <th>Volunteers</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+
+</html>
